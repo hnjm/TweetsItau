@@ -21,26 +21,26 @@ namespace Twitter
             twitterService.AuthenticateWith(_accessToken, _accessTokenSecret);
 
             int tweetcount = 1;
-            var tweets_search = twitterService.Search(new SearchOptions { Q = "#openbanking", Resulttype = TwitterSearchResultType.Popular, Count = 3 });
+            var tweets_search = twitterService.Search(new SearchOptions { Q = "#openbanking", Resulttype = TwitterSearchResultType.Recent, Count = 100 });
             //Resulttype can be TwitterSearchResultType.Popular or TwitterSearchResultType.Mixed or TwitterSearchResultType.Recent  
             List<TwitterStatus> resultList = new List<TwitterStatus>(tweets_search.Statuses);
             foreach (var tweet in tweets_search.Statuses)
             {
                 try
                 {
-                    //tweet.User.ScreenName;  
-                    //tweet.User.Name;   
-                    //tweet.Text; // Tweet text  
-                    //tweet.RetweetCount; //No of retweet on twitter  
-                    //tweet.User.FavouritesCount; //No of Fav mark on twitter  
-                    //tweet.User.ProfileImageUrl; //Profile Image of Tweet  
-                    //tweet.CreatedDate; //For Tweet posted time  
+                    string screenName  = tweet.User.ScreenName;  
+                    string userName  = tweet.User.Name;   
+                    string text  = tweet.Text; // Tweet text  
+                    int retweetCount  = tweet.RetweetCount; //No of retweet on twitter  
+                    int favouritesCount  = tweet.User.FavouritesCount; //No of Fav mark on twitter  
+                    string profileImage  = tweet.User.ProfileImageUrl; //Profile Image of Tweet  
+                    DateTime createdDate = tweet.CreatedDate; //For Tweet posted time  
                     //"https://twitter.com/intent/retweet?tweet_id=" + tweet.Id;  //For Retweet  
                     //"https://twitter.com/intent/tweet?in_reply_to=" + tweet.Id; //For Reply  
                     //"https://twitter.com/intent/favorite?tweet_id=" + tweet.Id; //For Favorite  
 
                     //Above are the things we can also get using TweetSharp.  
-                    Console.WriteLine("Sr.No: " + tweetcount + "\n" + tweet.User.Name + "\n" + tweet.User.ScreenName + "\n" + "https://twitter.com/intent/retweet?tweet_id=" + tweet.Id);
+                    Console.WriteLine(screenName + "\n" + userName + "\n" + text + "\n" + retweetCount + "\n" + retweetCount + "\n" + favouritesCount + "\n" + profileImage + "\n" + createdDate);
                     tweetcount++;
                 }
                 catch { }
